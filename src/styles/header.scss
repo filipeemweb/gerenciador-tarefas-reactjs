@@ -1,0 +1,92 @@
+@import "./config.scss";
+
+.container-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border: 0 solid $lightGreyColor;
+  border-bottom-width: 2px;
+
+  padding: 24px 0;
+
+  .logo {
+    width: 120px;
+    margin-left: 16px;
+  }
+
+  button {
+    display: none;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      color: $primaryColor;
+      margin-right: 10px;
+      letter-spacing: 0.02em;
+    }
+
+    .sair {
+      width: 30px;
+      height: 30px;
+      margin-right: 16px;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    .mobile {
+      display: none;
+    }
+
+    .logo {
+      width: 158px;
+      margin-left: 80px;
+    }
+
+    button {
+      display: block;
+      border: none;
+      border-radius: 12px;
+      background-color: $secondaryColor;
+      width: 175px;
+      height: 40px;
+      padding: 2px;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      align-items: center;
+
+      span {
+        font-size: 21px;
+        margin-right: 6px;
+      }
+    }
+
+    .desktop {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      margin-right: 80px;
+
+      span {
+        font-size: 20px;
+        color: $secondaryColor;
+        margin-right: 20px;
+      }
+
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+}

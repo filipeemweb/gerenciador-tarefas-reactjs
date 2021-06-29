@@ -17,7 +17,7 @@ function App() {
         </Route>
         :
         <Route path="*">
-          <Home accessToken={accessToken} />
+          <Home setAccessToken={setAccessToken} />
         </Route>
       }
     </Switch>
