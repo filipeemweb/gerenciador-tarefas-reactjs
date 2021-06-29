@@ -5,23 +5,41 @@ import { Input } from '../components/Input';
 import logo from '../assets/icons/devaria-logo.svg';
 import mail from '../assets/icons/mail.svg';
 import lock from '../assets/icons/lock.svg';
+import { executaRequisicao } from '../services/api';
 
 
-export const Login = () => {
+export const Login = (props) => {
 
   const [login, setLogin] = useState('');
   const [senha, setSenha] = useState('');
+  const [msgErro, setMsgErro] = useState('');
   const [isLoading, setLoading] = useState(false);
 
-  const executaLogin = evento => {
-    evento.preventDefault();
-    setLoading(true);
-    console.log('login', login);
-    console.log('senha', senha);
+  const executaLogin = async evento => {
+    try {
+      evento.preventDefault();
+      setLoading(true);
 
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
+      const body = {
+        login,
+        senha
+      }
+
+      const resultado = await executaRequisicao('login', 'post', body)
+
+      if (resultado?.data?.token) {
+        localStorage.setItem('accessToken', resultado.data.token);
+        localStorage.setItem('usuarioNome', resultado.data.nome);
+        localStorage.setItem('usuarioEmail', resultado.data.email);
+        props.setAccessToken(resultado.data.token);
+      }
+
+    } catch (e) {
+      if (e?.response?.data?.erro) {
+        setMsgErro(e.response.data.erro)
+      }
+      console.log(e);
+    }
   }
 
   return (
@@ -32,6 +50,7 @@ export const Login = () => {
         className="logo"
       />
       <form>
+        <p>{msgErro}</p>
         <Input
           srcImg={mail}
           altImg={"Ícone email"}

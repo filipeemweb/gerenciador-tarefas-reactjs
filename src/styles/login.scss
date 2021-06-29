@@ -8,6 +8,12 @@
     width: 196.8px;
   }
 
+  p {
+    max-width: 280px;
+    text-align: center;
+    color: $errorColor;
+  }
+
   button {
     margin-top: 12px;
     width: 100%;
