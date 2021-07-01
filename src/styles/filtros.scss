@@ -1,0 +1,109 @@
+@import "./config.scss";
+
+#container-filtros {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  background: $lightGreyColor;
+  border-radius: 12px;
+  padding: 10px;
+
+  .title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 0.01em;
+      color: $primaryColor;
+    }
+
+    img {
+      cursor: pointer;
+    }
+
+    .form {
+      display: none;
+    }
+  }
+
+  .filtros-mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 10px;
+    
+    div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 8px 0;
+
+      label {
+        color: $primaryColor;
+        font-size: 16px;
+        min-width: 110px;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // @media screen and (min-width: 992px) {
+  //   padding: 20px;
+
+  //   span {
+  //     font-size: 24px;
+  //   }
+
+  //   img {
+  //     width: 30px;
+  //   }
+  // }
+
+  @media screen and (min-width: 1260px) {
+    padding: 20px;
+
+    .filtros-mobile {
+      display: none;
+    }
+
+    .title {
+      img {
+        display: none;
+      }
+
+      .form {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        label {
+          color: $primaryColor;
+          font-size: 16px;
+          margin: 0 10px;
+        }
+
+        input,
+        select {
+          border-color: $primaryColor;
+          cursor: pointer;
+        }
+
+        .line {
+          border-color: $secondaryColor;
+          border-width: 1px;
+          border-style: solid;
+          height: 40px;
+          width: 0;
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}

@@ -37,6 +37,8 @@ export const Login = (props) => {
     } catch (e) {
       if (e?.response?.data?.erro) {
         setMsgErro(e.response.data.erro)
+      } else {
+        setMsgErro('Não foi possível efetuar o login, fale com o administrador!')
       }
       console.log(e);
     }

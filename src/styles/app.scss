@@ -32,3 +32,51 @@ body {
 @import "./config.scss";
 @import "./login.scss";
 @import "./header.scss";
+@import "./filtros.scss";
+@import "./listagem.scss";
+@import "./footer.scss";
+@import "./item.scss";
+
+input,
+select {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: normal;
+  font-family: "Biennale Regular", sans-serif;
+  letter-spacing: 0.01em;
+  color: $primaryColor;
+  min-width: 220px;
+  background-color: transparent;
+
+  border: 0 solid $mediumGreyColor;
+  border-bottom-width: 0.1em;
+  outline: none;
+
+  &:focus {
+    border-color: $primaryColor;
+  }
+
+  &::placeholder { // Chrome, Firefox, Safari e Opera
+    color: $mediumGreyColor;
+    opacity: 100%;
+  }
+
+  &:-ms-input-placeholder { // Internet Explorer
+    color: $mediumGreyColor;
+  }
+
+  &::-ms-input-placeholder { // Microsoft Edge
+    color: $mediumGreyColor;
+  }
+
+}
+
+@media screen and (min-width: 992px) {
+  input,
+  select {
+    border: 1px solid $mediumGreyColor;
+    border-radius: 8px;
+    padding: 5px;
+
+  }
+}
