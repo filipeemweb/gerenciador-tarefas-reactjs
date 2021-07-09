@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: flex-start;
   width: 95%;
-  height: 60px;
+  height: 55px;
   background: $lightGreyColor;
   border-radius: 12px;
   padding: 10px;
@@ -23,12 +23,42 @@
       color: $darkGreyColor;
       font-size: 15px;
       font-weight: bold;
+
+      &.concluido {
+        text-decoration: line-through;
+      }
     }
 
     span {
       color: $darkGreyColor;
       font-size: 14px;
       font-weight: 400;
+    }
+  }
+
+  @media screen and (min-width: 992px) {
+    height: 70px;
+    padding: 20px;
+
+    img {
+      width: 20px;
+    }
+
+    &.ativo {
+      cursor: pointer;
+
+      &:hover {
+        border: 1px solid $primaryColor;
+        div {
+          p {
+            color: $primaryColor;
+          }
+
+          span {
+            color: $primaryColor;
+          }
+        }
+      }
     }
   }
 }

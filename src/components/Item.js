@@ -6,13 +6,22 @@ import imgDone from '../assets/icons/checked.svg';
 
 export const Item = props => {
   const { tarefa } = props;
+  const { dataConclusao, nome, dataPrevisaoConclusao } = tarefa;
+
+  const getDataText = (dtConclusao, dtPrevConclusao) => {
+    if (!dtConclusao) {
+      return `Previsão de conclusão em: ${moment(dtPrevConclusao).format('DD/MM/yyyy')}`;
+    } else {
+      return `Concluido em: ${moment(dtConclusao).format('DD/MM/yyyy')}`;
+    }
+  }
 
   return (
-    <div id="container-item">
-      <img src={imgNotDone} alt="Selecionar tarefa" />
+    <div id="container-item" className={dataConclusao ? "" : "ativo"}>
+      <img src={dataConclusao ? imgDone : imgNotDone} alt={dataConclusao ? 'tarefa concluída' : 'selecione a tarefa'} />
       <div>
-        <p>{tarefa?.nome}</p>
-        <span>Previsão de conclusão em: {moment(tarefa?.dataPrevisaoConclusao).format('DD/MM/yyyy')}</span>
+        <p className={dataConclusao ? "concluido" : ""}>{nome}</p>
+        <span>{getDataText(dataConclusao, dataPrevisaoConclusao)}</span>
       </div>
     </div>
   );
