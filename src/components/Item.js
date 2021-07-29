@@ -5,8 +5,8 @@ import imgNotDone from '../assets/icons/not-checked.svg';
 import imgDone from '../assets/icons/checked.svg';
 
 export const Item = props => {
-  const { tarefa } = props;
-  const { dataConclusao, nome, dataPrevisaoConclusao } = tarefa;
+  const { tarefa, selecionarTarefa } = props;
+  const { dataConclusao, nome, dataPrevistaConclusao } = tarefa;
 
   const getDataText = (dtConclusao, dtPrevConclusao) => {
     if (!dtConclusao) {
@@ -17,11 +17,11 @@ export const Item = props => {
   }
 
   return (
-    <div id="container-item" className={dataConclusao ? "" : "ativo"}>
+    <div id="container-item" className={dataConclusao ? "" : "ativo"} onClick={() => dataConclusao ? null : selecionarTarefa(tarefa)}>
       <img src={dataConclusao ? imgDone : imgNotDone} alt={dataConclusao ? 'tarefa concluída' : 'selecione a tarefa'} />
       <div>
         <p className={dataConclusao ? "concluido" : ""}>{nome}</p>
-        <span>{getDataText(dataConclusao, dataPrevisaoConclusao)}</span>
+        <span>{getDataText(dataConclusao, dataPrevistaConclusao)}</span>
       </div>
     </div>
   );

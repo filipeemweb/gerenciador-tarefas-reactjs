@@ -7,14 +7,14 @@ const instance = axios.create({
 });
 
 export const executaRequisicao = (endpoint, metodo, body) => {
-  const accessToken = localStorage.getItem('access_token');
+  const accessToken = localStorage.getItem('accessToken');
 
   let headers = { 'Content-Type': 'application/json' };
   if (accessToken) {
     headers['Authorization'] = 'Bearer ' + accessToken;
   }
 
-  console.log(`Executando: ${URL} ${endpoint}, metodo: ${metodo}, body: ${body}, headers: ${headers}`);
+  console.log(`Executando: ${URL} ${endpoint}, metodo: ${metodo}, body: ${JSON.stringify(body)}, headers: ${JSON.stringify(headers)}`);
   return instance.request({
     url: endpoint,
     method: metodo,

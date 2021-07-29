@@ -20,10 +20,10 @@ export const Home = (props) => {
   //states do modal
   const [showModal, setShowModal] = useState(false);
   const [nomeTarefa, setNomeTarefa] = useState('');
-  const [dataPrevisaoTarefa, setDataPrevisaoTarefa] = useState('');
+  const [dataPrevistaConclusao, setDataPrevistaConclusao] = useState('');
   const [erro, setErro] = useState('')
 
-  const togglModal = () => {
+  const toggleModal = () => {
     setShowModal(!showModal);
   }
 
@@ -51,20 +51,22 @@ export const Home = (props) => {
 
   const salvarTarefa = async () => {
     try {
-      if (!nomeTarefa || !dataPrevisaoTarefa) {
+      if (!nomeTarefa || !dataPrevistaConclusao) {
         setErro('Favor informar nome e data de previsão');
         return;
       }
 
       const body = {
         nome: nomeTarefa,
-        dataPrevisaoTarefa: dataPrevisaoTarefa
+        dataPrevistaConclusao
       }
 
       await executaRequisicao('tarefa', 'post', body);
+      await getTarefasComFiltro();
       setNomeTarefa('');
-      setDataPrevisaoTarefa('');
-      togglModal();
+      setDataPrevistaConclusao('');
+      toggleModal();
+      setErro('');
     } catch (e) {
       console.log(e);
       if (e?.response?.data?.erro) {
@@ -89,7 +91,7 @@ export const Home = (props) => {
 
   return (
     <>
-      <Header sair={sair} showModal={setShowModal} />
+      <Header sair={sair} showModal={toggleModal} />
       <Filtros
         periodoDe={periodoDe}
         periodoAte={periodoAte}
@@ -97,9 +99,9 @@ export const Home = (props) => {
         setPeriodoDe={setPeriodoDe}
         setPeriodoAte={setPeriodoAte}
         setStatus={setStatus} />
-      <Listagem tarefas={tarefas} />
-      <Footer showModal={togglModal} />
-      <Modal show={showModal} onHide={togglModal} id="container-modal">
+      <Listagem tarefas={tarefas} getTarefas={getTarefasComFiltro} />
+      <Footer showModal={toggleModal} />
+      <Modal show={showModal} onHide={toggleModal} id="container-modal">
         <Modal.Body>
           <p>Adicionar uma tarefas</p>
           {erro && <p className="error">{erro}</p>}
@@ -111,18 +113,19 @@ export const Home = (props) => {
           <input type="text" name="dataPrevisao"
             placeholder="Data de previsão de conclusão"
             className="col-12"
-            value={dataPrevisaoTarefa}
-            onChange={event => setDataPrevisaoTarefa(event.target.value)}
+            value={dataPrevistaConclusao}
+            onChange={event => setDataPrevistaConclusao(event.target.value)}
             onFocus={event => event.target.type = 'date'}
-            onBlur={event => dataPrevisaoTarefa ? event.target.type = 'date' : event.target.type = 'text'} />
+            onBlur={event => dataPrevistaConclusao ? event.target.type = 'date' : event.target.type = 'text'} />
         </Modal.Body>
         <Modal.Footer>
           <div className="buttons col-12">
             <button onClick={salvarTarefa}>Salvar</button>
             <span onClick={() => {
-              togglModal();
+              toggleModal();
               setNomeTarefa('');
-              setDataPrevisaoTarefa('');
+              setDataPrevistaConclusao('');
+              setErro('');
             }}>Cancelar</span>
           </div>
         </Modal.Footer>
